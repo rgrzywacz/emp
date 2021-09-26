@@ -15,7 +15,7 @@ public class AddressHolder {
     }
 
     //krok 3 - utorzenie metody getInstance, która zwraca samą siebie
-    public static AddressHolder getInstance() {
+    synchronized public static AddressHolder getInstance() {
         if (instance == null) {
             instance = new AddressHolder();
         }
