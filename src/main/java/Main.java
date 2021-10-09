@@ -10,7 +10,7 @@ import task.TaskService;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-
+        //test
         Address addressOne = new Address("Łódź","93-100","Pomorska","231");
         Address addressTwo = new Address("Łódź","93-100","Gdańska","22A");
 
