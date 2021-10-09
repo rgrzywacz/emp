@@ -1,10 +1,15 @@
 package employee;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import address.Address;
+import observer.Observer;
 
-public class Employee {
+public class Employee implements Observer {
 
     private static long counter = 1;
     private Long id;
@@ -21,6 +26,7 @@ public class Employee {
     private LocalDate endAt;
     private String position;
     private String notes;
+    private List<String> messages;
 
     private Employee() {
         this.id = counter++;
@@ -28,6 +34,16 @@ public class Employee {
 
     public static EmployeeBuilder builder(String firstName, String lastName) {
         return new EmployeeBuilder(firstName, lastName);
+    }
+
+    public List<String> getMessages() {
+        return messages;
+    }
+    //Observer krok 3 - implementacja metody update z abstrakcji Observer.
+    @Override
+    public void update(Map<String, String> values) {
+        String taskID = values.get("TaskID");
+        messages.add("New task with id: " + taskID+ " with priority Critical has been created at: " + LocalDateTime.now());
     }
 
 
@@ -46,6 +62,7 @@ public class Employee {
         private LocalDate endAt;
         private String position;
         private String notes;
+        private List<String> messages;
 
         public EmployeeBuilder(String firstName, String lastName) {
             this.firstName = firstName;
@@ -115,6 +132,7 @@ public class Employee {
 
         public Employee build() {
             Employee employee = new Employee();
+            employee.messages = new ArrayList<>();
             employee.firstName = this.firstName;
             employee.secondName = this.secondName;
             employee.lastName = this.lastName;
