@@ -44,7 +44,7 @@ public class Employee implements Observer {
     @Override
     public void update(Map<String, String> values) {
         String taskID = values.get("TaskID");
-        String messageContent = "New task with id: " + taskID+ " with priority Critical has been created at: " + LocalDateTime.now();
+        String messageContent = "New task with id: " + taskID+ " with priority Critical";
         Message message = new Message(messageContent, LocalDateTime.now());
         messages.add(message);
     }

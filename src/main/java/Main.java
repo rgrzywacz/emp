@@ -4,6 +4,7 @@ import address.Address;
 import address.AddressHolder;
 import employee.Employee;
 import observer.TaskPublisher;
+import strategy.*;
 import task.Task;
 import task.TaskPriority;
 import task.TaskService;
@@ -46,11 +47,15 @@ public class Main {
         //Observer demo - utworzenie zadania w klasie TaskService, a w niej wywołanie publishera, który znotyfikuje obserwatorów
         Task criticalTask = taskService.createTask("Title 1", "Description 1", TaskPriority.CRITICAL);
         Thread.sleep(1000);
-        Task majorTask = taskService.createTask("Title 2", "Description 2", TaskPriority.MAJOR);
+        Task majorTask = taskService.createTask("Title 2", "Description 2", TaskPriority.CRITICAL);
         System.out.println(criticalTask.toString());
 
         System.out.println(jan.getMessages());
-
+        SortService sortService = new SortService();
+        sortService.sortMessages(SortType.DESC, jan.getMessages());
+        System.out.println(jan.getMessages());
+        sortService.sortMessages(SortType.ASC, jan.getMessages());
+        System.out.println(jan.getMessages());
 
         System.out.println(addressHolderTwo.findAddress(1L));
     }
