@@ -26,7 +26,7 @@ public class Employee implements Observer {
     private LocalDate endAt;
     private String position;
     private String notes;
-    private List<String> messages;
+    private List<Message> messages;
 
     private Employee() {
         this.id = counter++;
@@ -36,14 +36,17 @@ public class Employee implements Observer {
         return new EmployeeBuilder(firstName, lastName);
     }
 
-    public List<String> getMessages() {
+    public List<Message> getMessages() {
         return messages;
     }
+
     //Observer krok 3 - implementacja metody update z abstrakcji Observer.
     @Override
     public void update(Map<String, String> values) {
         String taskID = values.get("TaskID");
-        messages.add("New task with id: " + taskID+ " with priority Critical has been created at: " + LocalDateTime.now());
+        String messageContent = "New task with id: " + taskID+ " with priority Critical has been created at: " + LocalDateTime.now();
+        Message message = new Message(messageContent, LocalDateTime.now());
+        messages.add(message);
     }
 
 
